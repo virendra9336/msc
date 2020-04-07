@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>my web page</title>
+</head>
+<body>
+
+<h1>Welcome to My first Page: <span th:text="${name}"></span></h1>
+<h1>Address is: <span th:text="${address}"></span></h1>
+
+<form  action="#"  th:action="@{/saveemp}" th:object="${employeeVo}" method="post">
+
+<div th:if="${employee!= null}" th:with="emp=${employee}">
+<table>
+<input type="hidden"  th:name="id" th:value="${emp.id}">
+<tr>
+<td>Name:</td>
+<td><input type="text"  th:name="name" th:value="${emp.name}"></td>
+</tr>
+<tr>
+<td>Address:</td>
+<td><input type="text" th:name="address" th:value="${emp.address}" ></td>
+</tr>
+<tr>
+<td>date_of_birth:</td>
+<td><input type="text"  th:name="dob" th:value="${emp.dob}"></td>
+</tr>
+ <tr>
+<td>Company_Name:</td>
+<td><input type="text" th:name="orgName" th:value="${emp.orgName}" ></td>
+</tr>
+
+<tr>
+<td>Department :</td>
+<td><input type="text" th:name="department" th:value="${emp.department}"></td>
+</tr> 
+<tr>
+
+<tr>
+<td><input type="submit" value="Save"></td>
+<td><input type="reset" value="reset"></td>
+</tr>
+
+</table>
+</div>
+
+<div th:unless="${employee}">
+ 
+
+<table>
+<tr>
+<td>Name:</td>
+<td><input type="text"  th:field="*{name}" ></td>
+</tr>
+<tr>
+<td>Address:</td>
+<td><input type="text"  th:field="*{address}"></td>
+</tr>
+
+<tr>
+<td>date_of_birth:</td>
+<td><input type="text"  th:field="*{dob}"></td>
+</tr>
+
+ 
+ <tr>
+<td>Company_Name:</td>
+<td><input type="text" th:field="*{orgName}"></td>
+</tr>
+
+<tr>
+<td>Department :</td>
+<td><input type="text" th:field="*{department}"></td>
+</tr> 
+<tr>
+
+ 
+<tr>
+<td><input type="submit" value="Save"></td>
+<td><input type="reset" value="reset"></td>
+</tr>
+
+</table>  
+</div>
+
+
+
+
+
+
+
+
+
+
+</form>
+<table border="1px">
+<tr>
+<td>Name</td>
+<td>Address</td>
+<td>Date Of birth</td>
+<td>Company_Name</td>
+<td>Department</td>
+<td>update</td>
+<td>Delete</td>
+</tr>
+
+<div th:with="someVariable=${list.getBody()}">
+<tr th:each="instance : ${someVariable.result}">
+<td th:text="${instance.name}">name</td>
+<td th:text="${instance.address}">Address</td>
+<td th:text="${instance.dob}">Date Of birth</td>
+<td th:text="${instance.orgName}">Company_Name</td>
+<td th:text="${instance.department}">Department</td>
+<td ><a th:href="@{'/update/'+${instance.id}}">click to update</a></td>
+<td><a th:href="@{'/delete/'+${instance.id}}" >click to delete</a></td>
+</tr>
+</div>
+</table>
+
+
+</body>
+</html>
